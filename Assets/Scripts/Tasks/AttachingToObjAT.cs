@@ -28,13 +28,25 @@ namespace NodeCanvas.Tasks.Actions {
 
 			//initial value of the target obj for comparison later
 			GameObject originalTargetObj = movingObjListBBP.value[0];
+			if (targetObjBBP.value != null)
+			{
+                //originalTargetObj = targetObjBBP.value;
+                agent.transform.position = targetObjBBP.value.transform.position;
+            }
+				
+
+			
 			
 			//check each moving obj to decide which one to attach to
 			foreach (GameObject movingObj in movingObjListBBP.value)
 			{
-				//if the moving obj would move the agent away from its destination (the right side)
+				//if the moving obj would move the agent away from its destination (the right side),
 				//ignore it
-				if (movingObj.transform.position.x < agent.transform.position.x)
+				if (movingObj.transform.position.x <= agent.transform.position.x)
+					continue;
+
+				//if the moving obj is the object character is currently on, ignore it
+				if (movingObj == targetObjBBP.value)
 					continue;
 
 				//get the directions 
