@@ -3,6 +3,7 @@ using UnityEngine;
 public class EggSpawner : MonoBehaviour
 {
     public GameObject eggPrefab;
+    GameObject eggsHolder;
     public float eggSpawnTime = 3;
     public float eggLimit = 10;
     public Vector3 eggLowBoundSpawn;
@@ -13,7 +14,7 @@ public class EggSpawner : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
+        eggsHolder = GameObject.Find("EggsHolder");
     }
 
     // Update is called once per frame
@@ -23,7 +24,9 @@ public class EggSpawner : MonoBehaviour
 
         if (timer >= eggSpawnTime)
         {
-            SpawnEgg();
+            if (eggsHolder.transform.childCount < eggLimit)
+                SpawnEgg();
+
             timer = 0;
         }
     }

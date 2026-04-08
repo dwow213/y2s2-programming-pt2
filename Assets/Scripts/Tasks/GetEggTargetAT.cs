@@ -22,6 +22,7 @@ namespace NodeCanvas.Tasks.Actions {
 			}
 
 			eggTargetBBP.value = eggs[Random.Range(0, eggs.Count - 1)];
+			eggTargetBBP.value.GetComponent<Egg>().opponentEgg = true;
 			EndAction(true);
 		}
 
