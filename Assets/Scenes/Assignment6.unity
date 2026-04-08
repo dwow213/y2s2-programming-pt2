@@ -552,9 +552,10 @@ GameObject:
   - component: {fileID: 691484115}
   - component: {fileID: 691484120}
   - component: {fileID: 691484119}
+  - component: {fileID: 691484121}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -690,6 +691,20 @@ MonoBehaviour:
   clickableLayers:
     serializedVersion: 2
     m_Bits: 128
+--- !u!114 &691484121
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 691484114}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f75e24adc594dfa48a124ca4972b9859, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::BlastEgg
+  currentEgg: {fileID: 0}
+  blastPower: 40
 --- !u!1 &712327676
 GameObject:
   m_ObjectHideFlags: 0
@@ -1456,7 +1471,7 @@ GameObject:
   - component: {fileID: 1933847332}
   m_Layer: 0
   m_Name: Chicken
-  m_TagString: Untagged
+  m_TagString: Chicken
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

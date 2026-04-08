@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Egg
   - Opponent
+  - Chicken
   layers:
   - Default
   - TransparentFX
