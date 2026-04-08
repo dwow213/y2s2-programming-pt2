@@ -33,8 +33,12 @@ public class EggCollection : MonoBehaviour
         if (other.CompareTag("Egg"))
         {
             score++;
-            GameObject opponent = other.transform.parent.gameObject;
-            opponent.GetComponent<Blackboard>().SetVariableValue("eggTarget", null);
+            if (other.transform.parent.CompareTag("Opponent"))
+            {
+                GameObject opponent = other.transform.parent.gameObject;
+                print($"opponent: {opponent}");
+                opponent.GetComponent<Blackboard>().SetVariableValue("eggTarget", null);
+            }
             Destroy(other.gameObject);
         }
     }

@@ -40,8 +40,10 @@ public class EggSpawner : MonoBehaviour
             Random.Range(eggLowBoundSpawn.z, eggHighBoundSpawn.z)
             );
 
+        
         egg.transform.position = newPos;
         egg.transform.parent = GameObject.Find("EggsHolder").transform;
+        egg.GetComponent<Egg>().eggsHolder = eggsHolder;
 
     }
 }
