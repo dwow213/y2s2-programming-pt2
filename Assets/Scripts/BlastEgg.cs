@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.AI;
 
 public class BlastEgg : MonoBehaviour
 {
@@ -35,6 +36,11 @@ public class BlastEgg : MonoBehaviour
             currentEgg = collision.gameObject;
             currentEgg.GetComponent<Egg>().playerEgg = true;
         }
+
+        if (collision.gameObject.CompareTag("Chicken") )
+        {
+            
+        }
     }
 
     private void OnCollisionExit(Collision collision)
@@ -43,7 +49,6 @@ public class BlastEgg : MonoBehaviour
         {
             currentEgg.GetComponent<Egg>().playerEgg = false;
             currentEgg = null;
-            
         }
     }
 }

@@ -22,6 +22,7 @@ namespace NodeCanvas.Tasks.Actions {
 		protected override void OnExecute() 
 		{
 			agent.speed = speed;
+			hasTurned = false;
 		}
 
 		//Called once per frame while the action is active.
@@ -32,14 +33,17 @@ namespace NodeCanvas.Tasks.Actions {
 
 			if (!hasTurned)
 			{
-				agent.transform.LookAt(pushTargetBBP.value.transform);
+                agent.transform.LookAt(pushTargetBBP.value.transform);
 				Quaternion rotation = agent.transform.rotation;
 				rotation.x = 0;
 				rotation.z = 0;
 				agent.transform.rotation = rotation;
 
-				float dirToTarget = Vector3.Dot(agent.transform.position, pushTargetBBP.value.transform.position);
-				if (dirToTarget < targetDirection)
+				Vector3 dirToTarget = pushTargetBBP.value.transform.position - agent.transform.position;
+                float dotProduct = Vector3.Dot(agent.transform.forward, dirToTarget.normalized);
+
+				Debug.Log($"dir to target: {dirToTarget}");
+				if (dotProduct > targetDirection)
 					hasTurned = true;
 			}
 			else
