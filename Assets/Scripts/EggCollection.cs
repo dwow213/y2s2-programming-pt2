@@ -6,18 +6,6 @@ public class EggCollection : MonoBehaviour
 {
     public int score;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     private void OnTriggerEnter(Collider other)
     {
         CheckCollision(other);
@@ -32,9 +20,13 @@ public class EggCollection : MonoBehaviour
     {
         if (other.CompareTag("Egg"))
         {
+            //increase the score if an egg
             score++;
+
+            //if the egg was pushed by the opponent
             if (other.transform.parent.CompareTag("Opponent"))
             {
+                //reset the opponent's eggTarget so they can look for a new one
                 GameObject opponent = other.transform.parent.gameObject;
                 print($"opponent: {opponent}");
                 opponent.GetComponent<Blackboard>().SetVariableValue("eggTarget", null);

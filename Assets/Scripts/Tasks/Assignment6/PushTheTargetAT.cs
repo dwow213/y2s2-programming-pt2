@@ -16,29 +16,30 @@ namespace NodeCanvas.Tasks.Actions {
 		public bool hasTurned;
 		public float speed;
 
-		//This is called once each time the task is enabled.
-		//Call EndAction() to mark the action as finished, either in success or failure.
-		//EndAction can be called from anywhere.
+		//reset speed and set up chicken for targetting
 		protected override void OnExecute() 
 		{
 			agent.speed = speed;
 			hasTurned = false;
 		}
 
-		//Called once per frame while the action is active.
 		protected override void OnUpdate() 
 		{
-            if (!currentlyAttackingBBP.value)
+            //stops attacking when the chicken has hit their target
+			if (!currentlyAttackingBBP.value)
                 EndAction(true);
 
+			//first, check if the chicken has turned to their target (signifier)
 			if (!hasTurned)
 			{
-                agent.transform.LookAt(pushTargetBBP.value.transform);
+                //chicken looks at their target
+				agent.transform.LookAt(pushTargetBBP.value.transform);
 				Quaternion rotation = agent.transform.rotation;
 				rotation.x = 0;
 				rotation.z = 0;
 				agent.transform.rotation = rotation;
 
+				//get the dot product to check whether the chicken is looking relatively where the target is
 				Vector3 dirToTarget = pushTargetBBP.value.transform.position - agent.transform.position;
                 float dotProduct = Vector3.Dot(agent.transform.forward, dirToTarget.normalized);
 
@@ -46,6 +47,7 @@ namespace NodeCanvas.Tasks.Actions {
 				if (dotProduct > targetDirection)
 					hasTurned = true;
 			}
+			//move the agent to the target's position to attack
 			else
 				agent.SetDestination(pushTargetBBP.value.transform.position);
         }

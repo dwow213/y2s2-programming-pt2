@@ -13,17 +13,6 @@ public class ChickenChases : MonoBehaviour
         blackboard = GetComponent<Blackboard>();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
-    private void FixedUpdate()
-    {
-
-    }
-
     private void OnCollisionEnter(Collision collision)
     {
         print($"collision: {collision.gameObject}, {collision.gameObject.tag}");
@@ -37,13 +26,14 @@ public class ChickenChases : MonoBehaviour
         if (collision.gameObject != blackboard.GetVariableValue<GameObject>("pushTarget"))
             return;
 
+        //push the character the chicken targetted
         Deceleration hitObject = collision.gameObject.GetComponent<Deceleration>();
         Vector3 directionVector = collision.transform.position - transform.position;
         print($"dir vector: {directionVector}, vel: {directionVector.normalized * Mathf.Pow(pushPower, 2)}");
         hitObject.AddKinematicForce(directionVector, pushPower);
-        //collision.rigidbody.AddForce(directionVector.normalized * Mathf.Pow(pushPower, 2));
-        //collision.rigidbody.linearVelocity = directionVector.normalized * Mathf.Pow(pushPower, 2);
         print($"vel: {collision.rigidbody.linearVelocity}");
+
+        //stop chicken's attacking state
         blackboard.SetVariableValue("currentlyAttacking", false);
         print("PUSHING P");
     }

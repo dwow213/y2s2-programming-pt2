@@ -22,6 +22,7 @@ public class EggSpawner : MonoBehaviour
     {
         timer += Time.deltaTime;
 
+        //spawn an egg every amount of seconds as long as it hasn't hitten the egg limit
         if (timer >= eggSpawnTime)
         {
             if (eggsHolder.transform.childCount < eggLimit)
@@ -31,6 +32,7 @@ public class EggSpawner : MonoBehaviour
         }
     }
 
+    //spawns an egg in a random position
     void SpawnEgg()
     {
         GameObject egg = Instantiate(eggPrefab);

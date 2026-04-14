@@ -22,12 +22,14 @@ namespace NodeCanvas.Tasks.Actions {
 		//EndAction can be called from anywhere.
 		protected override void OnExecute() 
 		{
+			//flip the z multiplier so they move either up or down (from our camera position), which imitates the zigzag
 			zMultiplierBBP.value *= -1;
 			if (agent.transform.position.x >= xBoundBBP.value || agent.transform.position.x <= -xBoundBBP.value)
 			{
 				xMultiplierBBP.value *= -1;
 			}
 
+			//get the new destination by randomly determining the x or z based on bounds variables
 			Vector3 newPos = Vector3.zero;
 			newPos.x = Random.Range(velocityLowerRangeBBP.value.x, velocityUpperRangeBBP.value.x) * xMultiplierBBP.value;
 			if (newPos.x > xBoundBBP.value)
@@ -43,9 +45,11 @@ namespace NodeCanvas.Tasks.Actions {
 			else if (newPos.z < -zBoundBBP.value)
 				newPos.z = -zBoundBBP.value;
 
+			//set the new destination
 			destinationBBP.value += newPos;
 
             var path = new NavMeshPath();
+			//go to the new destination
             if (!agent.CalculatePath(destinationBBP.value, path))
 			{
 				destinationBBP.value = newPos;

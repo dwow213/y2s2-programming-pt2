@@ -17,9 +17,10 @@ public class Egg : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
+        //if an egg pushed by opponent and is either touched by a player, chicken or an egg pushed by a player
         if (opponentEgg && (collision.gameObject.CompareTag("Player") || collision.gameObject.CompareTag("Chicken") || CheckIfPlayerEgg(collision)))
         {
-            print("touching shit");
+            //stop the egg dead in its tracks and unregister it as an opponent egg
             opponentEgg = false;
             if (transform.parent.CompareTag("Opponent"))
             {
@@ -30,10 +31,12 @@ public class Egg : MonoBehaviour
             }
         }
 
+        //just in case, make it not a player egg if it touches something that is not a player
         if (!collision.gameObject.CompareTag("Player"))
             playerEgg = false;
     }
 
+    //same thing as OnCollisionEnter, just now for if the collision stays with the thingamajig
     private void OnCollisionStay(Collision collision)
     {
         if (opponentEgg && (collision.gameObject.CompareTag("Player") || collision.gameObject.CompareTag("Chicken") || CheckIfPlayerEgg(collision)))
@@ -54,6 +57,7 @@ public class Egg : MonoBehaviour
             playerEgg = false;
     }
 
+    //just checks whether the thing they collided with is an egg pushed by a player
     bool CheckIfPlayerEgg(Collision collision)
     {
         Egg egg = collision.gameObject.GetComponent<Egg>();
